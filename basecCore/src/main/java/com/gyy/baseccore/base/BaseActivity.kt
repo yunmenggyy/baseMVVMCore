@@ -1,38 +1,33 @@
 package com.gyy.baseccore.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.os.PersistableBundle
+import android.support.v7.app.AppCompatActivity
 import com.gyy.baseccore.buildViewModel
 import java.lang.reflect.ParameterizedType
 
 /**
  *
- * 创建时间: 2019/7/28
+ * 创建时间: 2019/7/29
  *
  * 作者：GuanYangYi
  *
- * 功能描述：fragment的基类
+ * 功能描述：Activity基础类
  *
  *
  */
+open abstract class BaseActivity<VM:BaseViewModel>:AppCompatActivity(){
 
-open abstract class BaseFragment<VM:BaseViewModel>:Fragment(){
+    private val mViewModel by lazy { buildViewModel(getT(this, 0), this) }
 
-    private val mViewModel by lazy { buildViewModel(getT(this, 0), null, this) }
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(setLayoutId(), container)
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initLayout()
+    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
+        setContentView(setLayoutId())
+        initView()
         observe()
     }
+
+
+
 
 
     private fun  getT(o: Any, i: Int): Class<VM>? {
@@ -65,6 +60,6 @@ open abstract class BaseFragment<VM:BaseViewModel>:Fragment(){
      * 初始化布局
      *
      * */
-    fun initLayout(){}
+    fun initView(){}
 
 }
