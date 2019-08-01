@@ -13,15 +13,15 @@ import retrofit2.Retrofit
  *
  *
  */
-class HttpManager private constructor(okHttpClient: OkHttpClient? = null, clazz: Class<Any>? = null){
+class HttpManager private constructor(okHttpClient: OkHttpClient? = null, clazz: Class<*>? = null){
 
     private val mOkHttpClient by lazy { construct(okHttpClient, clazz) }
-    private var retrofit = null
+    var retrofit:Any? = null
 
-    private fun construct(okHttpClient: OkHttpClient?, clazz: Class<Any>?): OkHttpClient? {
+    private fun construct(okHttpClient: OkHttpClient?, clazz: Class<*>?): OkHttpClient? {
         okHttpClient?.let { Retrofit.Builder().client(okHttpClient) }
             .let { if (clazz!=null) {
-              it?.baseUrl("")?.build()?.create(clazz)
+                retrofit =  it?.build()?.create(clazz)
             }}
 
         return okHttpClient
@@ -31,7 +31,7 @@ class HttpManager private constructor(okHttpClient: OkHttpClient? = null, clazz:
     companion object {
         @Volatile private var instance:HttpManager? = null
 
-        fun  getInstance(okHttpClient: OkHttpClient? = null, clazz: Class<Any>? = null):HttpManager{
+        fun getInstance(okHttpClient: OkHttpClient? = null, clazz: Class<*>? = null):HttpManager{
             if (instance == null || okHttpClient!=null || clazz!= null) {
                 synchronized(HttpManager ::class) {
                     if (instance == null) {

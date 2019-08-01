@@ -1,6 +1,8 @@
 package com.gyy.baseccore.base
 
 import android.arch.lifecycle.ViewModel
+import com.gyy.baseccore.net.HttpManager
+import com.gyy.baseccore.MyApi2
 
 /**
  *
@@ -13,5 +15,5 @@ import android.arch.lifecycle.ViewModel
  *
  */
 open class BaseViewModel:ViewModel(){
-
 }
+

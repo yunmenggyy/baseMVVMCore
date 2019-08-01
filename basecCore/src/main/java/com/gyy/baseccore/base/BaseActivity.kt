@@ -18,7 +18,7 @@ import java.lang.reflect.ParameterizedType
  */
 open abstract class BaseActivity<VM:BaseViewModel>:AppCompatActivity(){
 
-    private val mViewModel by lazy { buildViewModel(getT(this, 0), this) }
+    val mViewModel by lazy { buildViewModel(getT(this, 0), this) }
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         setContentView(setLayoutId())

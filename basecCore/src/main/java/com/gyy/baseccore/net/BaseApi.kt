@@ -1,4 +1,4 @@
-package com.gyy.baseccore.base
+package com.gyy.baseccore.net
 
 /**
  *
