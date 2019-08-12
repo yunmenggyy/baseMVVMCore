@@ -14,7 +14,7 @@ import com.gyy.baseccore.base.BaseViewModel
  * 功能描述：建造ViewModel工具
  *
  *
- */
+ */xjava:2.2.10
 
 fun <VM:BaseViewModel> buildViewModel(viewModelClass: Class<VM>?, fragmentActivity: FragmentActivity? = null, fragment: Fragment? = null ):VM?{
     viewModelClass?.run {
